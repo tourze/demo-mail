@@ -1,6 +1,6 @@
 {
-  "name": "tourze/demo-mail",
-  "description": "一个异步的邮件发送中心",
+  "name": "tourze/demo-mail-server",
+  "description": "一个异步的邮件发送中心，服务端",
   "authors": [
     {
       "name": "tourze",
