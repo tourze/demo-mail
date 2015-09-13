@@ -1,5 +1,5 @@
 {
-  "name": "tourze/demo-mail-server",
+  "name": "tourze/mail-server",
   "description": "一个异步的邮件发送中心，服务端",
   "authors": [
     {
@@ -18,12 +18,12 @@
   },
   "autoload": {
     "psr-4": {
-      "mailServer\\": "src/"
+      "tourze\\MailServer\\": "src/"
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "mailServer\\": "tests/"
+      "tourze\\MailServer\\": "tests/"
     }
   },
   "repositories": [

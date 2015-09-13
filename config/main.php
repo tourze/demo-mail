@@ -29,7 +29,7 @@ return [
         // Worker进程，接受用户提交请求
         'mail-worker' => [
             'socketName' => 'Text://0.0.0.0:42003',
-            'initClass'  => '\mailServer\Bootstrap\MailWorker',
+            'initClass'  => '\tourze\MailServer\Bootstrap\MailWorker',
             'queueFile'  => ROOT_PATH . 'data/queue.php',
         ],
     ],

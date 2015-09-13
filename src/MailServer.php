@@ -1,6 +1,6 @@
 <?php
 
-namespace mailServer;
+namespace tourze\MailServer;
 
 use Swift_Attachment;
 use Swift_Mailer;

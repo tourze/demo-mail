@@ -1,10 +1,10 @@
 <?php
 
-namespace mailServer\Bootstrap;
+namespace tourze\MailServer\Bootstrap;
 
-use mailServer\MailServer;
 use tourze\Base\Base;
 use tourze\Base\Helper\Arr;
+use tourze\MailServer\MailServer;
 use tourze\Server\Worker;
 use Workerman\Connection\ConnectionInterface;
 use Workerman\Lib\Timer;
