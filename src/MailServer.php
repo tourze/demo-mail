@@ -1,6 +1,6 @@
 <?php
 
-namespace mail;
+namespace mailServer;
 
 use Swift_Attachment;
 use Swift_Mailer;
@@ -9,6 +9,7 @@ use Swift_Message;
 use Swift_SendmailTransport;
 use Swift_SmtpTransport;
 use tourze\Base\Base;
+use tourze\Base\Config;
 use tourze\Base\Helper\Arr;
 
 /**
@@ -16,13 +17,29 @@ use tourze\Base\Helper\Arr;
  *
  * @package mail
  */
-class Mail
+class MailServer
 {
 
     /**
      * @var array Swift_Mailer[]
      */
     public static $mailerList = [];
+
+    /**
+     * 从配置文件中加载发送器信息
+     */
+    public static function loadConfig()
+    {
+        $config = Config::load('mailServer')->asArray();
+        foreach ($config as $id => $params)
+        {
+            if ( ! isset($params['id']))
+            {
+                $params['id'] = $id;
+            }
+            self::createMailer($params);
+        }
+    }
 
     /**
      * 创建指定配置的发送器
@@ -103,7 +120,7 @@ class Mail
         $message = Swift_Message::newInstance(
             Arr::get($params, 'subject'),
             Arr::get($params, 'body'),
-            Arr::get($params, 'contentType'),
+            Arr::get($params, 'contentType', 'text/html'), // 默认是html
             Arr::get($params, 'charset')
         );
 
@@ -186,10 +203,13 @@ class Mail
             }
         }
 
-        $result = $mailer->send($message);
+        $failures = [];
+        //print_r($mailer);
+        $result = $mailer->send($message, $failures);
 
         Base::getLog()->info(__METHOD__ . ' send mail - end', [
-            'result' => $result,
+            'result'   => $result,
+            'failures' => $failures,
         ]);
         return $result > 0;
     }

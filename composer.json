@@ -10,8 +10,6 @@
   "minimum-stability": "stable",
   "require": {
     "tourze/base": "^1.0",
-    "tourze/bootstrap": "^1.0",
-    "tourze/controller": "^1.0",
     "tourze/server": "^1.0",
     "swiftmailer/swiftmailer": "^5.4"
   },
@@ -20,7 +18,12 @@
   },
   "autoload": {
     "psr-4": {
-      "mail\\": "src/"
+      "mailServer\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "mailServer\\": "tests/"
     }
   },
   "repositories": [

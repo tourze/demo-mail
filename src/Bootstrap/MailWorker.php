@@ -1,8 +1,8 @@
 <?php
 
-namespace mail\Bootstrap;
+namespace mailServer\Bootstrap;
 
-use mail\Mail;
+use mailServer\MailServer;
 use tourze\Base\Base;
 use tourze\Base\Helper\Arr;
 use tourze\Server\Worker;
@@ -106,6 +106,7 @@ class MailWorker extends Worker
     {
         // 定时发送邮件
         Timer::add($this->mailSendInternal, [$this, 'processSendTask']);
+        MailServer::loadConfig();
 
         // 从文件中读取已经存在的队列文件
         if ($this->queueFile)
@@ -141,7 +142,7 @@ class MailWorker extends Worker
                 break;
             }
             $mail = (array) array_pop($this->queue);
-            $result = Mail::send($mail, Arr::get($mail, 'sender'));
+            $result = MailServer::send($mail, Arr::get($mail, 'sender'));
             if ($result)
             {
                 Base::getLog()->info(__METHOD__ . ' send one mail success', $mail);
